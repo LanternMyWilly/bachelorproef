@@ -1,0 +1,134 @@
+import { NavLink, Link } from "@remix-run/react";
+
+export function Sidebar() {
+  return (
+    <div className="sidebar-normal flex flex-col items-center w-60 h-full overflow-hidden text-gray-700 bg-gray-200 rounded">
+      <Link className="flex items-center w-full px-3 my-5" to="/">
+        <svg
+          className="w-8 h-8 fill-current"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
+        </svg>
+        <span className="ml-8 text-xl font-bold">Putrid Grove</span>
+      </Link>
+      <div className="w-full px-2">
+        <div className="flex flex-col items-center w-full mt-3 border-t border-gray-300 border-b">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `flex items-center w-full h-12 px-3 mt-10 rounded hover:bg-gray-300 ${
+                isActive ? "bg-gray-300" : undefined
+              }`
+            }
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+              <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+            </svg>
+            <span className="ml-8 text-sm font-medium">Dasboard</span>
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${
+                isActive ? "bg-gray-300" : undefined
+              }`
+            }
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path
+                fillRule="evenodd"
+                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="ml-8 text-sm font-medium">About</span>
+          </NavLink>
+          <NavLink
+            to="/items"
+            className={({ isActive }) =>
+              `flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${
+                isActive ? "bg-gray-300" : undefined
+              }`
+            }
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path
+                fillRule="evenodd"
+                d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 004.25 22.5h15.5a1.875 1.875 0 001.865-2.071l-1.263-12a1.875 1.875 0 00-1.865-1.679H16.5V6a4.5 4.5 0 10-9 0zM12 3a3 3 0 00-3 3v.75h6V6a3 3 0 00-3-3zm-3 8.25a3 3 0 106 0v-.75a.75.75 0 011.5 0v.75a4.5 4.5 0 11-9 0v-.75a.75.75 0 011.5 0v.75z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="ml-8 text-sm font-medium">Items</span>
+          </NavLink>
+          <NavLink
+            to="/payoffs"
+            className={({ isActive }) =>
+              `flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${
+                isActive ? "bg-gray-300" : undefined
+              }`
+            }
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path
+                fillRule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.902 7.098a3.75 3.75 0 013.903-.884.75.75 0 10.498-1.415A5.25 5.25 0 008.005 9.75H7.5a.75.75 0 000 1.5h.054a5.281 5.281 0 000 1.5H7.5a.75.75 0 000 1.5h.505a5.25 5.25 0 006.494 2.701.75.75 0 00-.498-1.415 3.75 3.75 0 01-4.252-1.286h3.001a.75.75 0 000-1.5H9.075a3.77 3.77 0 010-1.5h3.675a.75.75 0 000-1.5h-3c.105-.14.221-.274.348-.402z"
+                clipRule="evenodd"
+              />
+            </svg>
+
+            <span className="ml-8 text-sm font-medium">Payoffs</span>
+          </NavLink>
+        </div>
+        <div className="flex flex-col items-center w-full">
+          <NavLink
+            to="/users"
+            className={({ isActive }) =>
+              `flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${
+                isActive ? "bg-gray-300" : undefined
+              }`
+            }
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path
+                fillRule="evenodd"
+                d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="ml-8 text-sm font-medium">Users</span>
+          </NavLink>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center w-full mt-auto">
+        <NavLink
+          to="/myaccount"
+          className={({ isActive }) =>
+            `flex items-center justify-center w-full h-16 hover:bg-gray-400 ${
+              isActive ? "bg-gray-400" : "bg-gray-300"
+            }`
+          }
+        >
+          <svg
+            className="w-6 h-6 stroke-current"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span className="ml-2 text-sm font-medium">Account</span>
+        </NavLink>
+      </div>
+    </div>
+  );
+}

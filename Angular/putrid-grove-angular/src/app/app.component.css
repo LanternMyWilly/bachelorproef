@@ -1,0 +1,17 @@
+.main-container {
+  height: 100%;
+  overflow: hidden;
+  margin: 0px;
+  display: flex;
+  box-sizing: border-box;
+}
+
+/* .column {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+} */
+
+#left {
+  flex-shrink: 0;
+}

@@ -1,0 +1,159 @@
+<div
+  class="w-96 h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow-md"
+>
+  <img
+    class="rounded-t-lg"
+    src="https://picsum.photos/200/100"
+    alt="Small picture of an item in the items list"
+  />
+  <div class="p-5 flex-1 flex flex-col justify-between">
+    <div class="mb-4 flex justify-between items-center">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700">
+        {{ item.name }}
+      </h5>
+      <h6
+        class="text-2xl font-bold text-white bg-gray-500 rounded-lg px-2 py-1 ml-2"
+      >
+        €{{ item.price }}
+      </h6>
+    </div>
+    <p class="mb-3 font-normal text-gray-700 break-words">
+      {{ item.description }}
+    </p>
+    <div class="flex items-center justify-between">
+      <div>
+        <button
+          [attr.data-modal-target]="item.id"
+          [attr.data-modal-toggle]="item.id"
+          href="#"
+          class="inline-flex items-center w-max px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300"
+        >
+          Details
+          <svg
+            aria-hidden="true"
+            class="w-4 h-4 ml-2 -mr-1"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <p class="text-gray-700 pl-3">
+        {{ item.payedBy.firstName }} {{ item.payedBy.lastName }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Main modal -->
+<div
+  [id]="item.id"
+  tabindex="-1"
+  aria-hidden="true"
+  class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
+>
+  <div class="relative w-full h-full max-w-2xl md:h-auto">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <!-- Modal header -->
+      <button
+        type="button"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute right-2 top-2 inline-flex items-center"
+        [attr.data-modal-hide]="item.id"
+      >
+        <svg
+          aria-hidden="true"
+          class="w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+      <div class="flex flex-col">
+        <img
+          class="rounded-t-lg"
+          src="https://picsum.photos/900/300"
+          alt="Picture of the selected item"
+        />
+        <div class="p-6">
+          <h1 class="text-2xl font-bold text-gray-700 mt-6 mb-2">
+            {{ item.name }}
+          </h1>
+          <div class="flex flex-row items-center gap-10 text-xl text-gray-500">
+            <p>
+              Buy price:
+              <span class="text-gray-700 font-bold">€{{ item.price }}</span>
+            </p>
+            <p>
+              Remaining amount:
+              <span class="text-gray-700 font-bold"
+                >€{{ calculateRemainingAmount() }}</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Modal body -->
+      <div class="space-y-6 p-6">
+        <p class="text-base leading-relaxed text-gray-500">
+          {{ item.description }}
+        </p>
+        <div class="border-b-2"></div>
+        <p class="text-base leading-relaxed text-gray-500">
+          <span class="font-semibold">Type:</span>
+          {{ item.isShared ? "Shared" : "Individual" }} item
+        </p>
+        <div class="border-b-2"></div>
+        <p class="text-base leading-relaxed text-gray-500">
+          <span class="font-semibold">Is this item payed off?</span>
+          {{ item.isPayedOff ? "Yes" : "No" }}
+        </p>
+        <ng-container *ngIf="item.isShared">
+          <h4 class="uppercase text-center text-gray-500 font-semibold text-xl">
+            Payoff table
+          </h4>
+          <div class="relative max-h-44 overflow-y-auto">
+            <table class="w-full text-sm text-left text-gray-500">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3">User</th>
+                  <th scope="col" class="px-6 py-3">Amount</th>
+                  <th scope="col" class="px-6 py-3">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="bg-white border-b"
+                  *ngFor="let itemPayoff of item.itemPayOffs"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    {{ itemPayoff.user.firstName }}
+                    {{ itemPayoff.user.lastName }}
+                  </th>
+                  <td class="px-6 py-4">€{{ itemPayoff.amount }}</td>
+                  <td class="px-6 py-4">{{ itemPayoff.createdAt | date }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

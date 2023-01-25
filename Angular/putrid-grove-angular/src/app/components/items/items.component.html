@@ -1,0 +1,154 @@
+<div class="w-full h-full flex flex-col items-center">
+  <div class="w-full flex flex-col items-center text-gray-700">
+    <h1 class="text-5xl uppercase font-semibold mb-2">Items</h1>
+  </div>
+  <div
+    class="w-full h-full mt-10 pb-10 flex justify-center flex-wrap gap-10 overflow-auto"
+  >
+    <app-item-card *ngFor="let item of items" [item]="item"></app-item-card>
+  </div>
+</div>
+<button
+  title="Add item"
+  class="fixed z-10 top-20 right-8 uppercase bg-gray-600 rounded-lg py-2 px-5 flex justify-center items-center text-white text-2xl hover:bg-gray-700"
+  data-modal-target="default"
+  data-modal-toggle="addModal"
+  type="button"
+>
+  Add item
+</button>
+
+<!-- Main modal -->
+<div
+  id="addModal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
+>
+  <div class="relative w-full h-full max-w-2xl md:h-auto">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow p-6">
+      <!-- Modal header -->
+      <button
+        type="button"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute right-2 top-2 inline-flex items-center"
+        data-modal-hide="addModal"
+        #closebutton
+      >
+        <svg
+          aria-hidden="true"
+          class="w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+      <div class="uppercase">
+        <h1 class="text-2xl mb-3">add item</h1>
+      </div>
+      <!-- Modal body -->
+      <form [formGroup]="itemForm">
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            formControlName="name"
+            class="block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+            placeholder=" "
+            [ngClass]="{ 'border-red-500': formErrors.name }"
+          />
+          <label
+            htmlFor="name"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-gray-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            [ngClass]="{ 'text-red-500': formErrors.name }"
+          >
+            item name
+          </label>
+          <p *ngIf="formErrors.name" class="mt-2 text-sm text-red-600">
+            {{ formErrors.name }}
+          </p>
+        </div>
+        <div class="relative z-0 w-full mb-6 group">
+          <textarea
+            name="description"
+            id="description"
+            rows="4"
+            formControlName="description"
+            class="block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+            [ngClass]="{ 'border-red-500': formErrors.description }"
+            placeholder=" "
+          ></textarea>
+          <label
+            htmlFor="description"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-gray-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            [ngClass]="{ 'text-red-500': formErrors.description }"
+          >
+            description
+          </label>
+          <p *ngIf="formErrors.description" class="mt-2 text-sm text-red-600">
+            {{ formErrors.description }}
+          </p>
+        </div>
+        <div class="w-full mb-6 flex flex-col justify-center">
+          <div class="w-full flex items-center">
+            <div class="z-0 mr-6 group">
+              <div class="flex">
+                <span
+                  class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md"
+                  [ngClass]="{ 'border-red-500': formErrors.price }"
+                >
+                  €
+                </span>
+                <input
+                  type="text"
+                  id="price"
+                  name="price"
+                  formControlName="price"
+                  class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-gray-500 focus:border-gray-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
+                  [ngClass]="{ 'border-red-500': formErrors.price }"
+                  placeholder="price"
+                />
+              </div>
+            </div>
+            <div class="z-0 group">
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  value=""
+                  formControlName="isShared"
+                  class="sr-only peer"
+                  id="isShared"
+                  name="isShared"
+                />
+                <div
+                  class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"
+                ></div>
+                <span class="ml-3 text-sm text-gray-700"
+                  >This is a shared item</span
+                >
+              </label>
+            </div>
+          </div>
+          <p *ngIf="formErrors.price" class="mt-2 text-sm text-red-600">
+            {{ formErrors.price }}
+          </p>
+        </div>
+        <button
+          type="submit"
+          class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          (click)="onSubmit()"
+        >
+          Add item
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
